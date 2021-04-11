@@ -1,0 +1,157 @@
+// document.getElementById("demo").innerHTML = document.getElementById("name").value;
+
+let x;
+function writeName(id){
+    x = document.getElementById("name").value;
+}
+
+class Event{
+    constructor(scenario, question, option1, option2,  meme1, meme2){
+        this._scenario = scenario;
+        this._question = question;
+        this._option1 = option1;
+        this._option2 = option2;
+        this._meme1 = meme1;
+        this._meme2 = meme2;
+    }
+    setScene() {
+        document.getElementById("scenario").innerHTML = this._scenario;
+        document.getElementById("question").innerHTML = this._question;
+        document.getElementById("option1").innerHTML = this._option1;
+        document.getElementById("option2").innerHTML = this._option2;
+        memes.meme1 = this._meme1;
+        memes.meme2 = this._meme2;
+    }
+
+}
+const memes = {
+    meme1: "",
+    meme2: "",
+}
+
+function setImage1() {
+    document.getElementById("image").src = memes.meme1;
+    triggerRound(memes.meme1)
+}
+
+function setImage2() {
+    document.getElementById("image").src = memes.meme2;
+    triggerRound(memes.meme2)
+}
+
+function triggerRound(meme) {   
+    // Round 1
+    if (meme=="images/BernieMittens.jpeg") {Round2Scenario1()}
+    if (meme=="images/BidenFalling.jpg") {Round2Scenario2()}
+
+    // Round 2
+    if (meme=="images/Shoveling.png") {Round3Scenario1()}
+    if (meme=="images/SnowTubing.png") {}
+    if (meme=="images/Help.gif") {}
+    
+    
+    // Round 3
+    if (meme=="images/Dance.png") {Dance()}
+    if (meme=="images/BabyFist.png") {HappyWithPackage()}
+
+    // It's Wack
+    if (meme=="images/Crawl.png") {CrawlyBoi()}
+    if (meme=="images/FrozenMan.jpeg") {FrozenMan()}
+    if (meme=="images/Hellmo.png") {}
+    if (meme=="images/MrBean.png") {Investigate()}
+    if (meme=="images/Tiger.png") {Jail()}
+    if (meme=="images/Snowcone.png") {}
+
+}
+
+let text1;
+let text2;
+
+function start() {
+    document.getElementById("option1").disabled=false;
+    document.getElementById("option2").disabled=false;
+    document.getElementById("image").src = "images/Start.png";
+    document.getElementById("start").innerHTML = "Restart Story";
+    text1 = 'So ' + x + ', you have just woken up to a snowy morning, and you remember there is a package waiting in the mail.';
+    text2 = 'Do you get dressed to go outside? Or do you speed run to the mail box and back in your PJs?';
+    const firstevent = new Event(text1, text2, 'Get Dressed', 'Speed Run Mail', "images/BernieMittens.jpeg", "images/BidenFalling.jpg");
+    firstevent.setScene();
+}
+
+function Round2Scenario1() {
+    text1 = "After you take your time and find your hand knit mittens, you realize there's a whole lot of snow between you and the mail box."
+    text2 = "Do you shovel a path out of the entrance? Or do you slide off the roof in a snow tube?"
+    const round2scenario1 = new Event(text1, text2, "Shovel the snow", "Snow Tubing", "images/Shoveling.png", "images/SnowTubing.png");
+    round2scenario1.setScene();
+}
+
+function Round2Scenario2() {
+    text1 = 'On your way to the mailbox, you slip on the stairs and hit your head.'
+    text2 = "Do you yell for help? Or do you shrug it off and crawl your way to the mailbox?"
+    const round2scenario2 = new Event(text1, text2, "Call for help", "Crawl to package", "images/Help.gif" , "images/Crawl.png")
+    round2scenario2.setScene();
+}
+
+function Round3Scenario1() {
+    text1 = "You shovel your way all the way up to the mailbox.";
+    text2 = "Do you revel in your victory with a dance? Or do you grab your package?";
+    const round3scenario1 = new Event(text1, text2, "Dance party", "Grab the package", "images/Dance.png", "images/BabyFist.png");
+    round3scenario1.setScene();
+}
+
+function HappyWithPackage() {
+    text1 = "You grab your package out of the mailbox and turn around."
+    text2 = "As you walk back to your couch, you think about all the things that could have gone wrong this morning.";
+    const happywithpackage = new Event(text1, text2, "", "", "", "")
+    document.getElementById("option1").disabled=true;
+    document.getElementById("option2").disabled=true;
+    happywithpackage.setScene();
+}
+
+function Dance() {
+    text1 = "As you do your 'lil dancy dance , you realize you haven't streched. Just as you hear the bones in your back do something they are not supossed to, a snowplow comes along and covers you in snow.";
+    text2 = "Do you wallow in your pain and cry for an angel to save you from your despair? Or do you continue on your quest and crawl onward to the mailbox?";
+    const dance = new Event(text1, text2, "Cry for help", "Crawl to mailbox", "images/FrozenMan.jpeg", "images/Crawl.png")
+    dance.setScene();
+}
+
+function FrozenMan() {
+    text1 = "Your pitiful cry for help goes unanswered. Truly sad. If only you had the foresight to stretch, or even dance normally.";
+    text2 = "The immense pain and cold causes you to die.";
+    const frozenman = new Event(text1, text2, "", "", "", "");
+    document.getElementById("option1").disabled=true;
+    document.getElementById("option2").disabled=true;
+    frozenman.setScene();
+}
+
+function CrawlyBoi() {
+    text1 = "As you crawl, you realize your injuries aren't that bad, but you continue crawling for dramatic effect. On your journey, you notice a yellow patch in the snow.";
+    text2 = "Do you investigate the mysterious yellow spot? Or do you foucus on the mailbox and move on in life?";
+    const crawlyboi = new Event (text1, text2, "Investigate it", "Move on", "images/MrBean.png", "images/Hellmo.png")
+    crawlyboi.setScene();
+}
+
+function Investigate() {
+    text1 = "You realize that investigating could be a risk, but might be worth it.";
+    text2 = "Do you throw a snowball at your neighbor and let him figure it out? Or do you give the spot sniff yourself.";
+    const investigate = new Event (text1, text2, "Snowball fight", "Take a whiff", "images/Tiger.png", "images/SnowCone.png")
+    investigate.setScene();
+}
+
+function Jail() {
+    text1 = "Your neighbor doesn't appreciate your little act."
+    text2 = "He calls the cops on you and you spend the rest of you days rotting in jail.";
+    const jail = new Event(text1, text2, "", "", "", "")
+    document.getElementById("option1").disabled=true;
+    document.getElementById("option2").disabled=true;
+    jail.setScene();
+}
+
+function TasteSnow() {
+    text1 = "Taking it a step further, you taste the yellow snow. Turns out this wasn't a good idea. Whoops."
+    text2 = "";
+    const tastesnow = new Event(text1, text2, "", "", "", "")
+    document.getElementById("option1").disabled=true;
+    document.getElementById("option2").disabled=true;
+    snow.setScene();
+}
